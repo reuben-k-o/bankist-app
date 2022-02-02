@@ -75,18 +75,19 @@ const currencies = new Map([
 
 /////////////////////////////////////////////////
 
-let arr = ['a', 'b', 'c', 'd', 'e'];
-
+let arr = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+// console.log(arr);
 // console.log(arr.slice(2));
-// console.log(arr.slice(1, -1));  //begin, end // but the end index is NOT included except for negative no.s
+// console.log(arr.slice(1, 4)); //begin, end // but the end index is NOT included except for negative no.s
 // console.log(arr.slice(1, -2));
 // console.log(arr.slice()); //shallow copy of an array
 // console.log([...arr]);
 
 //SPLICE
-// console.log(arr.splice(1, 2)); //begin, no. of elements to delete
-// console.log(arr);
-// console.log(arr.splice(1, 2));
+console.log(arr.splice(1, 2)); //begin, no. of elements to delete
+console.log(arr);
+console.log(arr.splice(0, 2));
+console.log(arr);
 
 //BANKIST APP
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
@@ -149,15 +150,6 @@ const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, cur) => acc + cur, 0);
   labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
 };
-
-// const calcDisplayBalance = function (movements) {
-//   const balance = movements.reduce(function (acc, cur, i, arr) {
-//     // console.log(`Iteration ${i} :  accumulator ${acc} current Value${cur}`);
-//     return acc + cur;
-//   }, 0);
-
-//   labelBalance.textContent = `${balance}€`;
-// };
 
 ////////////////////
 const createUserName = function (accs) {
