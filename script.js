@@ -186,7 +186,30 @@ const updateUI = function (acc) {
   displayMovements(acc);
 };
 
-let currentAccount;
+const startLogOutTimer = function () {
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);
+    //in each call print the remaining time to UI
+    labelTimer.textContent = `${min}:${sec}`;
+    //when 0 seconds, stop the timer and log out user
+    if (time === 0) {
+      clearTimeout(timer);
+      containerApp.style.opacity = 0;
+      labelWelcome.textContent = 'Log in to get started';
+    }
+    //decrease timer
+    time--;
+  };
+  //set the timer
+  //call timer every second
+  let time = 300;
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+};
+
+let currentAccount, timer;
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
 
@@ -199,8 +222,30 @@ btnLogin.addEventListener('click', function (e) {
       currentAccount.owner.split(' ')[0]
     }`;
     containerApp.style.opacity = 100;
-    inputLoginPin.value = inputLoginUsername.value = '';
+    // inputLoginPin.value = inputLoginUsername.value = '';
+    // inputLoginPin.blur();
+
+    const now = new Date();
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric', //2-Dt
+      weekday: 'long', //short
+    };
+    const locale = navigator.language; // locale from the browser
+    labelDate.textContent = new Intl.DateTimeFormat(
+      currentAccount.locale,
+      options
+    ).format(now);
+
+    // Clear input fields
+    inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
+    //Timer
+    if (timer) clearInterval(timer);
+    timer = startLogOutTimer();
 
     updateUI(currentAccount);
   }
