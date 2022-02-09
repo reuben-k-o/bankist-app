@@ -292,10 +292,10 @@ btnLoan.addEventListener('click', function (e) {
 
     updateUI(currentAccount);
   }
+  inputLoanAmount.value = '';
+
   clearInterval(timer);
   timer = startLogOutTimer();
-
-  inputLoanAmount.value = '';
 });
 
 btnClose.addEventListener('click', function (e) {
