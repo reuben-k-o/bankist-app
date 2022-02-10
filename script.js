@@ -234,8 +234,6 @@ btnLogin.addEventListener('click', function (e) {
       currentAccount.owner.split(' ')[0]
     }`;
     containerApp.style.opacity = 100;
-    // inputLoginPin.value = inputLoginUsername.value = '';
-    // inputLoginPin.blur();
 
     const now = new Date();
     const options = {
@@ -252,7 +250,6 @@ btnLogin.addEventListener('click', function (e) {
       options
     ).format(now);
 
-    // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
     //Timer
@@ -300,7 +297,7 @@ btnLoan.addEventListener('click', function (e) {
   const amount = +inputLoanAmount.value;
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     currentAccount.movements.push(amount);
-    // currentAccount.movementsDates.push(new Date().toISOString());
+    currentAccount.movementsDates.push(new Date().toISOString());
 
     updateUI(currentAccount);
   }
